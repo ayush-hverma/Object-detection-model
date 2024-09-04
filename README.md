@@ -5,7 +5,7 @@ The project "Object Detection Using Images" focuses on identifying and classifyi
 - `yolov3.cfg`: The configuration file that defines the architecture of the YOLOv3 model, including layers, filters, and other hyperparameters.
 - `coco.names`: A file listing the names of the object classes that the model can detect, such as 'person', 'car', 'dog', etc.
 
-To download these files Using Terminal (Linux/Mac) or Command Prompt (Windows)
+# To download these files Using Terminal (Linux/Mac) or Command Prompt (Windows)
 
 # Download yolov3.weights
 curl -O https://pjreddie.com/media/files/yolov3.weights
@@ -19,8 +19,11 @@ After downloading these files, make sure they are in the correct directory, and 
 
 Outcomes:
 Object Detection: The primary outcome is the ability to detect and classify multiple objects within an image. The model outputs the detected objects' names, confidence scores, and bounding boxes (the coordinates defining the area of the object in the image).
+
 Real-Time Processing: With the YOLOv3 algorithm, the project can perform object detection in real-time, making it suitable for applications where speed is critical.
+
 Accuracy and Precision: The model provides high accuracy in detecting objects, especially for classes defined in the coco.names file. It balances speed and precision, identifying objects with minimal false positives and false negatives.
+
 Scalability: The project is scalable and can be adapted for different datasets by retraining the model with specific classes relevant to a particular application or industry.
 
 The project typically involves loading these files into a machine learning framework, running object detection on a set of images, and outputting the detected objects along with their bounding boxes and class labels.
