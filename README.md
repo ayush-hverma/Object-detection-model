@@ -17,7 +17,7 @@ curl -O https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
 curl -O https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 After downloading these files, make sure they are in the correct directory, and you can proceed with your YOLOv3 implementation.
 
-Outcomes:
+# Outcomes:
 Object Detection: The primary outcome is the ability to detect and classify multiple objects within an image. The model outputs the detected objects' names, confidence scores, and bounding boxes (the coordinates defining the area of the object in the image).
 
 Real-Time Processing: With the YOLOv3 algorithm, the project can perform object detection in real-time, making it suitable for applications where speed is critical.
