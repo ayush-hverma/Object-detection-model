@@ -4,4 +4,3 @@ coco.names
 yolov3.cfg
 venv
 yolo26n.pt
-yolo26_model/yolo26n.pt
