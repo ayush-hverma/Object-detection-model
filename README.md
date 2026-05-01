@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLO26-orange.svg)](https://ultralytics.com/)
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayu5hh/yolo26_model)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayu5hh/object-detection-model)
 
 This project features a high-performance, real-time object detection engine powered by the **YOLO26 Nano** architecture. The model is exclusively hosted on Hugging Face for seamless deployment across different systems.
 
@@ -10,7 +10,7 @@ This project features a high-performance, real-time object detection engine powe
 
 ## 📥 Getting the Model
 
-The model is hosted on Hugging Face as `ayu5hh/yolo26_model`. To use it on a new system, you must pull the weights from the hub.
+The model is hosted on Hugging Face as `ayu5hh/object-detection-model`. To use it on a new system, you must pull the weights from the hub.
 
 ### 1. Install Hugging Face Hub
 ```bash
@@ -20,7 +20,7 @@ pip install huggingface_hub
 ### 2. Download the Model
 You can download the model file directly into the project directory:
 ```bash
-hf download ayu5hh/yolo26_model yolo26n.pt --local-dir .
+hf download ayu5hh/object-detection-model yolo26n.pt --local-dir .
 ```
 
 ---
@@ -77,4 +77,4 @@ python ObjectDetection.py
 ---
 
 ## 🤝 Support
-For issues with the model weights, visit the [Hugging Face Repository](https://huggingface.co/ayush-hverma/yolo26_model).
+For issues with the model weights, visit the [Hugging Face Repository](https://huggingface.co/ayu5hh/object-detection-model).
