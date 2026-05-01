@@ -1,29 +1,80 @@
-# Object-detection-model
-The project "Object Detection Using Images" focuses on identifying and classifying objects within images using a pre-trained model. It utilizes the YOLOv3 (You Only Look Once) algorithm, which is known for its speed and accuracy in real-time object detection. The files `yolov3.weights`, `yolov3.cfg`, and `coco.names` are central to this project:
+# 🚀 YOLO26 Real-Time Object Detection (Hugging Face Edition)
 
-- `yolov3.weights`: Contains the pre-trained weights of the YOLOv3 model, which have been trained on the COCO dataset.
-- `yolov3.cfg`: The configuration file that defines the architecture of the YOLOv3 model, including layers, filters, and other hyperparameters.
-- `coco.names`: A file listing the names of the object classes that the model can detect, such as 'person', 'car', 'dog', etc.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLO26-orange.svg)](https://ultralytics.com/)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayush-hverma/yolo26_model)
 
-# To download these files Using Terminal (Linux/Mac) or Command Prompt (Windows)
+This project features a high-performance, real-time object detection engine powered by the **YOLO26 Nano** architecture. The model is exclusively hosted on Hugging Face for seamless deployment across different systems.
 
-# Download yolov3.weights
-curl -O https://pjreddie.com/media/files/yolov3.weights
+---
 
-# Download yolov3.cfg
-curl -O https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
+## 📥 Getting the Model
 
-# Download coco.names
-curl -O https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
-After downloading these files, make sure they are in the correct directory, and you can proceed with your YOLOv3 implementation.
+The model is hosted on Hugging Face as `ayush-hverma/yolo26_model`. To use it on a new system, you must pull the weights from the hub.
 
-# Outcomes:
-Object Detection: The primary outcome is the ability to detect and classify multiple objects within an image. The model outputs the detected objects' names, confidence scores, and bounding boxes (the coordinates defining the area of the object in the image).
+### 1. Install Hugging Face Hub
+```bash
+pip install huggingface_hub
+```
 
-Real-Time Processing: With the YOLOv3 algorithm, the project can perform object detection in real-time, making it suitable for applications where speed is critical.
+### 2. Download the Model
+You can download the model file directly into the project directory:
+```bash
+huggingface-cli download ayush-hverma/yolo26_model yolo26n.pt --local-dir .
+```
 
-Accuracy and Precision: The model provides high accuracy in detecting objects, especially for classes defined in the coco.names file. It balances speed and precision, identifying objects with minimal false positives and false negatives.
+---
 
-Scalability: The project is scalable and can be adapted for different datasets by retraining the model with specific classes relevant to a particular application or industry.
+## 🧪 Testing on a Different System
 
-The project typically involves loading these files into a machine learning framework, running object detection on a set of images, and outputting the detected objects along with their bounding boxes and class labels.
+Follow these steps to ensure the model works correctly on a fresh installation:
+
+### Step 1: Clone & Environment Setup
+```bash
+git clone https://github.com/ayush-hverma/Object-detection-model.git
+cd Object-detection-model
+
+# Recommended: Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\activate   # Windows
+```
+
+### Step 2: Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Step 3: Verify Hardware (Webcam)
+Ensure your system has a functional webcam. The script defaults to `src=0`. If you have multiple cameras, you may need to adjust the `WebcamStream(src=0)` line in `ObjectDetection.py`.
+
+### Step 4: Run the Model
+```bash
+python ObjectDetection.py
+```
+
+### Step 5: Expected Behavior
+- A window titled **"YOLO26 Object Detection"** should appear.
+- You should see a live video feed with **bounding boxes** and **labels** (e.g., "person", "cell phone") around detected objects.
+- The console should log: `Loading yolo26n.pt network...` and `Detection Engine ready.`
+
+---
+
+## 🏗️ Architecture Features
+
+- **HF-First Workflow**: No manual weight management; pull directly from the cloud.
+- **Async Threading**: Decoupled inference prevents video lag, maintaining a high FPS on the display thread.
+- **Nano-Scale Efficiency**: Optimized for CPU-based real-time detection without requiring expensive GPUs.
+
+---
+
+## 🛠️ Troubleshooting
+
+- **Model Not Found**: Ensure `yolo26n.pt` is in the root directory or the `yolo26_model/` folder.
+- **Camera Error**: Check if another application is using the webcam.
+- **Missing Dependencies**: Re-run `pip install -r requirements.txt` to ensure `ultralytics` and `opencv-python` are installed.
+
+---
+
+## 🤝 Support
+For issues with the model weights, visit the [Hugging Face Repository](https://huggingface.co/ayush-hverma/yolo26_model).
