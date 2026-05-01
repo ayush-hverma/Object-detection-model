@@ -10,7 +10,7 @@ This project features a high-performance, real-time object detection engine powe
 
 ## 📥 Getting the Model
 
-The model is hosted on Hugging Face as `ayush-hverma/yolo26_model`. To use it on a new system, you must pull the weights from the hub.
+The model is hosted on Hugging Face as `ayu5hh/yolo26_model`. To use it on a new system, you must pull the weights from the hub.
 
 ### 1. Install Hugging Face Hub
 ```bash
@@ -20,7 +20,7 @@ pip install huggingface_hub
 ### 2. Download the Model
 You can download the model file directly into the project directory:
 ```bash
-huggingface-cli download ayush-hverma/yolo26_model yolo26n.pt --local-dir .
+hf download ayu5hh/yolo26_model yolo26n.pt --local-dir .
 ```
 
 ---
