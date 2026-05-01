@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLO26-orange.svg)](https://ultralytics.com/)
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayush-hverma/yolo26_model)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayu5hh/yolo26_model)
 
 This project features a high-performance, real-time object detection engine powered by the **YOLO26 Nano** architecture. The model is exclusively hosted on Hugging Face for seamless deployment across different systems.
 
