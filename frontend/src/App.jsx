@@ -27,26 +27,32 @@ function App() {
     return () => window.removeEventListener('beforeunload', clearCache);
   }, [isStreaming]);
 
-  // Polling for detection metadata
+  // Stream detection metadata via SSE
   useEffect(() => {
     if (!isStreaming) return;
 
-    const fetchDetections = async () => {
+    const eventSource = new EventSource(`${API_BASE_URL}/detections/stream`);
+
+    eventSource.onmessage = (event) => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/detections`);
-        setDetections(response.data.detections);
+        const data = JSON.parse(event.data);
+        setDetections(data.detections);
         setStats(prev => ({
           ...prev,
-          count: response.data.count
+          count: data.count
         }));
         setLastUpdate(Date.now());
       } catch (error) {
-        console.error("Error fetching detections:", error);
+        console.error("Error parsing detection data:", error);
       }
     };
 
-    const interval = setInterval(fetchDetections, 100); // 10Hz metadata polling
-    return () => clearInterval(interval);
+    eventSource.onerror = (error) => {
+      console.error("SSE connection error:", error);
+      eventSource.close();
+    };
+
+    return () => eventSource.close();
   }, [isStreaming]);
 
   return (

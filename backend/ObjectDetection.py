@@ -44,7 +44,7 @@ class DetectionEngine:
     """
     Handles heavy YOLO26 inference in a background thread.
     """
-    def __init__(self, model_name="yolo26n.pt", repo_id="ayush-hverma/yolo26_model"):
+    def __init__(self, model_name="yolo26n.pt", repo_id="ayu5hh/object-detection-model"):
         print(f"Loading {model_name} network...")
         
         # Ensure model exists locally, otherwise pull from Hugging Face
@@ -63,7 +63,6 @@ class DetectionEngine:
             # Save a backup to the model folder
             os.makedirs("yolo26_model", exist_ok=True)
             self.model.save(os.path.join("yolo26_model", model_name))
-            
         except Exception as e:
             raise Exception(f"Failed to initialize YOLO26: {e}")
             

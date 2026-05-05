@@ -1,80 +1,119 @@
-# 🚀 YOLO26 Real-Time Object Detection (Hugging Face Edition)
+# 🚀 YOLO26 Intelligent Object Detection Dashboard
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
-[![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLO26-orange.svg)](https://ultralytics.com/)
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97-Model%20on%20HF-yellow.svg)](https://huggingface.co/ayu5hh/object-detection-model)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF.svg)](https://vitejs.dev/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97-Hugging%20Face-yellow.svg)](https://huggingface.co/ayu5hh/object-detection-model)
 
-This project features a high-performance, real-time object detection engine powered by the **YOLO26 Nano** architecture. The model is exclusively hosted on Hugging Face for seamless deployment across different systems.
-
----
-
-## 📥 Getting the Model
-
-The model is hosted on Hugging Face as `ayu5hh/object-detection-model`. To use it on a new system, you must pull the weights from the hub.
-
-### 1. Install Hugging Face Hub
-```bash
-pip install huggingface_hub
-```
-
-### 2. Download the Model
-You can download the model file directly into the project directory:
-```bash
-hf download ayu5hh/object-detection-model yolo26n.pt --local-dir .
-```
+A high-performance, full-stack object detection ecosystem featuring the **YOLO26 Nano** architecture. This project bridges the gap between complex AI inference and a beautiful, user-centric dashboard, delivering real-time insights with ultra-low latency.
 
 ---
 
-## 🧪 Testing on a Different System
+## ✨ Key Features
 
-Follow these steps to ensure the model works correctly on a fresh installation:
+- ⚡ **Ultra-Smooth Inference**: Multithreaded architecture decouples webcam capture from AI processing, ensuring a stutter-free 30+ FPS experience.
+- 🎨 **Glassmorphic Dashboard**: A premium, responsive UI built with React 19, featuring real-time detection logs, interactive analytics, and smooth Framer Motion animations.
+- 📡 **Real-Time Data Streaming**: Utilizes Server-Sent Events (SSE) to push detection metadata to the frontend instantly without polling overhead.
+- ☁️ **Cloud-Native Weights**: Automated model synchronization with Hugging Face Hub for seamless deployment across any environment.
+- 🪞 **User-Centric Feedback**: Horizontally mirrored video feed for a natural "mirror-like" webcam interaction.
+- 📊 **Live Analytics**: Instant object counting and confidence tracking directly on the dashboard.
 
-### Step 1: Clone & Environment Setup
+---
+
+## 🏗️ System Architecture
+
+### Backend (Python/FastAPI)
+- **FastAPI**: Serves the MJPEG video stream and SSE metadata.
+- **Ultralytics YOLO26**: The engine behind the detections, optimized for CPU/GPU efficiency.
+- **OpenCV**: Handles high-speed frame capture and image processing.
+- **Async Processing**: Separate threads for capture and detection to maximize throughput.
+
+### Frontend (React/Vite)
+- **React 19**: Modern component-based architecture.
+- **Framer Motion**: Powering the fluid UI transitions and detection list updates.
+- **Lucide React**: Beautiful, consistent iconography.
+- **Glassmorphic Design**: A futuristic aesthetic using backdrop-filter blur and subtle gradients.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/ayush-hverma/Object-detection-model.git
 cd Object-detection-model
-
-# Recommended: Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate   # Windows
 ```
 
-### Step 2: Install Dependencies
+### 2. Backend Setup
 ```bash
+# Move to backend directory
+cd backend
+
+# Create & activate virtual environment
+python -m venv venv
+.\venv\Scripts\activate  # Windows
+source venv/bin/activate # Linux/Mac
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### Step 3: Verify Hardware (Webcam)
-Ensure your system has a functional webcam. The script defaults to `src=0`. If you have multiple cameras, you may need to adjust the `WebcamStream(src=0)` line in `ObjectDetection.py`.
-
-### Step 4: Run the Model
+### 3. Model Weight Acquisition
+The system is pre-configured to use `yolo26n.pt`. If not present, download it from the Hugging Face Hub:
 ```bash
-python ObjectDetection.py
+pip install huggingface_hub
+hf download ayu5hh/object-detection-model yolo26n.pt --local-dir .
 ```
 
-### Step 5: Expected Behavior
-- A window titled **"YOLO26 Object Detection"** should appear.
-- You should see a live video feed with **bounding boxes** and **labels** (e.g., "person", "cell phone") around detected objects.
-- The console should log: `Loading yolo26n.pt network...` and `Detection Engine ready.`
+### 4. Frontend Setup
+```bash
+# Move to frontend directory
+cd ../frontend
+
+# Install packages
+npm install
+```
 
 ---
 
-## 🏗️ Architecture Features
+## 🛠️ Usage
 
-- **HF-First Workflow**: No manual weight management; pull directly from the cloud.
-- **Async Threading**: Decoupled inference prevents video lag, maintaining a high FPS on the display thread.
-- **Nano-Scale Efficiency**: Optimized for CPU-based real-time detection without requiring expensive GPUs.
+### Run the Backend
+From the `backend` directory:
+```bash
+python api.py
+```
+The API will be available at `http://localhost:8000`.
+
+### Run the Frontend
+From the `frontend` directory:
+```bash
+npm run dev
+```
+Open your browser and navigate to `http://localhost:5173`.
 
 ---
 
-## 🛠️ Troubleshooting
+## 🔌 API Endpoints
 
-- **Model Not Found**: Ensure `yolo26n.pt` is in the root directory or the `yolo26_model/` folder.
-- **Camera Error**: Check if another application is using the webcam.
-- **Missing Dependencies**: Re-run `pip install -r requirements.txt` to ensure `ultralytics` and `opencv-python` are installed.
+| Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/video_feed` | `GET` | MJPEG Video stream with bounding box overlays. |
+| `/detections/stream` | `GET` | SSE stream for real-time detection metadata. |
+| `/detections` | `GET` | Snapshot of current detections (JSON). |
 
 ---
 
-## 🤝 Support
-For issues with the model weights, visit the [Hugging Face Repository](https://huggingface.co/ayu5hh/object-detection-model).
+## 🧪 Technical Deep Dive: Async Inference
+To prevent the "laggy video" common in many AI demos, this project implements a dual-buffer multithreaded approach:
+1. **Capture Thread**: Continuously pulls frames from the webcam at the hardware's max FPS.
+2. **Detection Thread**: Pulls the *latest* available frame, runs YOLO inference, and updates the shared results pool.
+3. **API Thread**: Combines the capture and latest results to serve the stream and metadata independently.
+
+---
+
+## 🤝 Support & Contribution
+Model weights are hosted on [Hugging Face](https://huggingface.co/ayu5hh/object-detection-model). For issues or feature requests, please open a GitHub Issue.
+
+Built with ❤️ by [Ayush Verma](https://github.com/ayush-hverma)

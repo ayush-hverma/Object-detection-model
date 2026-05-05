@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import cv2
 import json
 import time
+import asyncio
 from ObjectDetection import WebcamStream, DetectionEngine
 
 app = FastAPI(title="YOLO26 Object Detection API")
@@ -77,6 +78,30 @@ async def get_detections():
         "detections": serializable,
         "timestamp": time.time()
     }
+
+@app.get("/detections/stream")
+async def get_detections_stream():
+    """SSE Endpoint for continuous detection metadata without polling overhead."""
+    async def event_generator():
+        while True:
+            detections = detector.get_results()
+            serializable = []
+            for d in detections:
+                serializable.append({
+                    "label": d["label"],
+                    "box": d["box"],
+                    "color": [int(c) for c in d["color"]]
+                })
+            
+            data = {
+                "count": len(serializable),
+                "detections": serializable,
+                "timestamp": time.time()
+            }
+            yield f"data: {json.dumps(data)}\n\n"
+            await asyncio.sleep(0.1)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 @app.on_event("shutdown")
 def shutdown_event():
